@@ -10,4 +10,8 @@ function NotFoundPage() {
   );
 }
 
+export function Head() {
+  return <title>Not found</title>;
+}
+
 export default NotFoundPage;
