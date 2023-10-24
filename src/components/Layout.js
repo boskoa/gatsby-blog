@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import * as React from "react";
 import "../styles/global.css";
 import styled from "styled-components";
+import Header from "./Header";
 
 const StyledContainer = styled.div`
   max-width: 800px;
@@ -40,6 +41,7 @@ const StyledTitle = styled.h1`
 function Layout({ pageTitle, children }) {
   return (
     <StyledContainer>
+      <Header />
       <StyledNav>
         <StyledNavList>
           <li>

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Layout from "../components/Layout";
 import { StaticImage } from "gatsby-plugin-image";
+import Seo from "../components/Seo";
 
 const IndexPage = () => {
   return (
@@ -12,7 +13,7 @@ const IndexPage = () => {
 };
 
 export function Head() {
-  return <title>Gatsby Blog</title>;
+  return <Seo title="Gatsby Blog Projct" />;
 }
 
 export default IndexPage;

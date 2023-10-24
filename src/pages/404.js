@@ -1,5 +1,6 @@
 import { Link } from "gatsby";
 import * as React from "react";
+import Seo from "../components/Seo";
 
 function NotFoundPage() {
   return (
@@ -11,7 +12,7 @@ function NotFoundPage() {
 }
 
 export function Head() {
-  return <title>Not found</title>;
+  return <Seo title="Not Found" />;
 }
 
 export default NotFoundPage;
