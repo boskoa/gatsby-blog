@@ -5,14 +5,15 @@ import styled from "styled-components";
 import useRoller from "../customHooks/useRoller";
 import { useRef } from "react";
 import { graphql } from "gatsby";
-import GatsbyImage from "gatsby-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const LENGTH = 100;
+const LENGTH = 130;
 const IMGWIDTH = 300;
+const IMGHEIGHT = 170;
 
 const StyledMainContainer = styled.div`
   display: flex;
-  min-height: 400px;
+  min-height: 300px;
   margin: 20px auto;
   justify-content: stretch;
   align-items: stretch;
@@ -26,8 +27,8 @@ const StyledRoller = styled.div`
   align-items: center;
   flex: 2;
   min-width: 320px;
-  min-height: ${IMGWIDTH}px;
-  perspective: 600px;
+  min-height: ${IMGHEIGHT}px;
+  perspective: 1000px;
   perspective-origin: center;
   overflow: hidden;
 `;
@@ -46,14 +47,15 @@ const StyledTentacle = styled.div`
   transform-origin: 0%;
   transform: ${({ $zDeg }) => `rotateZ(${$zDeg})`};
   transform-style: preserve-3d;
+  border: 1px solid red;
 `;
 
 const StyledImage = styled.div`
   position: absolute;
   right: -${IMGWIDTH / 2}px;
-  top: -${IMGWIDTH / 2}px;
+  top: -${IMGHEIGHT / 2}px;
   width: ${IMGWIDTH}px;
-  height: ${IMGWIDTH / (16 / 9)}px;
+  height: ${IMGHEIGHT}px;
   transform: rotateY(90deg);
   opacity: ${({ $focus }) => $focus};
   transition: all 0.5s;
@@ -62,6 +64,7 @@ const StyledImage = styled.div`
 const StyledDescription = styled.div`
   flex: 1;
   min-width: 260px;
+  height: ${IMGHEIGHT * 2}px;
   perspective: 600px;
   perspective-origin: center;
   overflow: hidden;
@@ -69,16 +72,15 @@ const StyledDescription = styled.div`
 `;
 
 const StyledSteps = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 300%;
+  height: ${IMGHEIGHT * 6}px;
   transform: translateY(calc(-100% / 3 * ${({ $current }) => $current}));
   transition: all 0.5s;
   border: 2px solid black;
 `;
 
 const StyledStep = styled.div`
-  height: calc(100% / 3);
+  height: ${IMGHEIGHT * 2}px;
+  overflow-y: scroll;
   border: 1px solid green;
 `;
 
@@ -95,9 +97,7 @@ function Roller({ data }) {
             {nodes.map((n, id) => (
               <StyledTentacle key={id} $zDeg={`-${steps[id]}deg`}>
                 <StyledImage $focus={current === id ? 1 : 0.2}>
-                  <GatsbyImage
-                    fluid={n.frontmatter.image.childImageSharp.fluid}
-                  />
+                  <GatsbyImage image={getImage(n.frontmatter.image)} alt={id} />
                 </StyledImage>
               </StyledTentacle>
             ))}
@@ -134,6 +134,13 @@ function Roller({ data }) {
         </StyledRoller>
         <StyledDescription>
           <StyledSteps $current={current}>
+            {nodes.map((n, id) => (
+              <StyledStep
+                key={id}
+                dangerouslySetInnerHTML={{ __html: n.html }}
+              />
+            ))}
+            {/*
             <StyledStep>
               First <br />
               First <br />
@@ -148,7 +155,7 @@ function Roller({ data }) {
               First <br />
             </StyledStep>
             <StyledStep>Second</StyledStep>
-            <StyledStep>Third</StyledStep>
+          <StyledStep>Third</StyledStep>*/}
           </StyledSteps>
         </StyledDescription>
       </StyledMainContainer>
@@ -163,9 +170,7 @@ export const query = graphql`
         frontmatter {
           image {
             childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(width: 300, height: 170, placeholder: BLURRED)
             }
           }
           title
