@@ -6,6 +6,7 @@ import Header from "./Header";
 
 const StyledContainer = styled.div`
   max-width: 800px;
+  min-width: 360px;
   margin: 0 auto;
 `;
 

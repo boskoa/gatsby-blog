@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 import styled from "styled-components";
 
-const StyleTitle = styled.h1`
+const StyleTitle = styled.div`
   text-align: center;
   background-color: gold;
   font-size: 24px;
