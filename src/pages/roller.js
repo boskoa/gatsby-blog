@@ -97,7 +97,10 @@ function Roller({ data }) {
             {nodes.map((n, id) => (
               <StyledTentacle key={id} $zDeg={`-${steps[id]}deg`}>
                 <StyledImage $focus={current === id ? 1 : 0.2}>
-                  <GatsbyImage image={getImage(n.frontmatter.image)} alt={id} />
+                  <GatsbyImage
+                    image={getImage(n.frontmatter.image)}
+                    alt={id.toString()}
+                  />
                 </StyledImage>
               </StyledTentacle>
             ))}
@@ -170,7 +173,7 @@ export const query = graphql`
         frontmatter {
           image {
             childImageSharp {
-              gatsbyImageData(width: 300, height: 170, placeholder: BLURRED)
+              gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
           title

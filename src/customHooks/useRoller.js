@@ -6,13 +6,19 @@ function useRoller(n, rollerRef) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    let span = 0;
     function handleWheel(e) {
       e.preventDefault();
+
+      span++;
+      if (span < 10) return;
+
       if (e.deltaY < 0) {
         setCurrent((p) => (p > 0 ? p - 1 : p));
       } else if (e.deltaY > 0) {
         setCurrent((p) => (p < n - 1 ? p + 1 : p));
       }
+      span = 0;
     }
 
     if (rollerRef.current) {
