@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const LENGTH = 130;
 const IMGWIDTH = 300;
 const IMGHEIGHT = 170;
 
@@ -28,7 +27,7 @@ const StyledRoller = styled.div`
   flex: 2;
   min-width: 320px;
   min-height: ${IMGHEIGHT}px;
-  perspective: 1000px;
+  perspective: ${({ $length }) => $length * 3}px;
   perspective-origin: center;
   overflow: hidden;
 `;
@@ -41,7 +40,7 @@ const StyledDot = styled.div`
 `;
 
 const StyledTentacle = styled.div`
-  width: ${LENGTH}px;
+  width: ${({ $length }) => $length}px;
   position: absolute;
   left: 0;
   transform-origin: 0%;
@@ -52,6 +51,9 @@ const StyledTentacle = styled.div`
 
 const StyledImage = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   right: -${IMGWIDTH / 2}px;
   top: -${IMGHEIGHT / 2}px;
   width: ${IMGWIDTH}px;
@@ -88,14 +90,19 @@ function Roller({ data }) {
   const { nodes } = data.allMarkdownRemark;
   const rollerRef = useRef(null);
   const { degGap, steps, current } = useRoller(nodes.length, rollerRef);
+  let length = 10 + (nodes.length - 1) * 38;
 
   return (
     <Layout pageTitle="Slider">
       <StyledMainContainer>
-        <StyledRoller ref={rollerRef}>
+        <StyledRoller ref={rollerRef} $length={length}>
           <StyledDot $current={`${current * degGap}deg`}>
             {nodes.map((n, id) => (
-              <StyledTentacle key={id} $zDeg={`-${steps[id]}deg`}>
+              <StyledTentacle
+                key={id}
+                $zDeg={`-${steps[id]}deg`}
+                $length={length}
+              >
                 <StyledImage $focus={current === id ? 1 : 0.2}>
                   <GatsbyImage
                     image={getImage(n.frontmatter.image)}
@@ -104,35 +111,6 @@ function Roller({ data }) {
                 </StyledImage>
               </StyledTentacle>
             ))}
-            {/*}
-            <StyledTentacle $zDeg={`${steps[0]}de0`}>
-              <StyledImage $focus={current === 0 ? 1 : 0.2}>
-                <img
-                  width={IMGWIDTH}
-                  src={`https://picsum.photos/id/1/${IMGWIDTH}`}
-                  alt="first"
-                />
-              </StyledImage>
-            </StyledTentacle>
-            <StyledTentacle $zDeg={`-${steps[1]}deg`}>
-              <StyledImage $focus={current === 1 ? 1 : 0.2}>
-                <img
-                  width={IMGWIDTH}
-                  src={`https://picsum.photos/id/45/${IMGWIDTH}`}
-                  alt="scond"
-                />
-              </StyledImage>
-            </StyledTentacle>
-            <StyledTentacle $zDeg={`-${steps[2]}deg`}>
-              <StyledImage $focus={current === 2 ? 1 : 0.2}>
-                <img
-                  width={IMGWIDTH}
-                  src={`https://picsum.photos/id/112/${IMGWIDTH}`}
-                  alt="third"
-                />
-              </StyledImage>
-            </StyledTentacle>
-            */}
           </StyledDot>
         </StyledRoller>
         <StyledDescription>
@@ -143,22 +121,6 @@ function Roller({ data }) {
                 dangerouslySetInnerHTML={{ __html: n.html }}
               />
             ))}
-            {/*
-            <StyledStep>
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-              First <br />
-            </StyledStep>
-            <StyledStep>Second</StyledStep>
-          <StyledStep>Third</StyledStep>*/}
           </StyledSteps>
         </StyledDescription>
       </StyledMainContainer>
