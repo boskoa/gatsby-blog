@@ -13,9 +13,13 @@ function Seo({ title }) {
   `);
 
   return (
-    <title>
-      {title} | {data.site.siteMetadata.title}
-    </title>
+    <>
+      <html lang="en" />
+      <title>
+        {title} | {data.site.siteMetadata.title}
+      </title>
+      <meta name="description" content="Gatsby blog tutorial"></meta>
+    </>
   );
 }
 
