@@ -8,11 +8,11 @@ function BlogPage({ data }) {
     <Layout pageTitle="My Blog Posts">
       {data.allMarkdownRemark.nodes.map((n) => (
         <article key={n.id}>
-          <h3>
+          <h2>
             <Link to={`/blogs/${n.frontmatter.slug}`}>
               {n.frontmatter.title}
             </Link>
-          </h3>
+          </h2>
           <p>{n.excerpt}</p>
         </article>
       ))}
