@@ -51,6 +51,9 @@ function Layout({ pageTitle, children }) {
           <li>
             <StyledLink to="/about">About</StyledLink>
           </li>
+          <li>
+            <StyledLink to="/blogs">Blogs</StyledLink>
+          </li>
         </StyledNavList>
       </StyledNav>
       <StyledMain>

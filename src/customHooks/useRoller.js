@@ -25,7 +25,7 @@ function useRoller(n, rollerRef) {
       rollerRef.current.addEventListener("wheel", handleWheel);
     }
 
-    return () => rollerRef.current.removeEventListener("wheel", handleWheel);
+    return () => rollerRef.current?.removeEventListener("wheel", handleWheel);
   }, []);
 
   return { degGap: degGap.current, steps: steps.current, current };

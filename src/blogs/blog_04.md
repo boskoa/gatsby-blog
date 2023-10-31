@@ -1,6 +1,7 @@
 ---
 title: Fourth blog
 image: ../images/04.jpg
+slug: "fourth-post"
 ---
 
 ### Lorem ipsum dolor

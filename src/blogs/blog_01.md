@@ -1,6 +1,7 @@
 ---
 title: First blog
 image: ../images/01.jpg
+slug: "first-post"
 ---
 
 ### Lorem ipsum dolor

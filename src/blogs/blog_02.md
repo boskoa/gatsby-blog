@@ -1,6 +1,7 @@
 ---
 title: Second blog
 image: ../images/02.jpg
+slug: "second-post"
 ---
 
 ### Lorem ipsum dolor

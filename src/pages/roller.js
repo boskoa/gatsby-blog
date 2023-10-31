@@ -46,7 +46,6 @@ const StyledTentacle = styled.div`
   transform-origin: 0%;
   transform: ${({ $zDeg }) => `rotateZ(${$zDeg})`};
   transform-style: preserve-3d;
-  border: 1px solid red;
 `;
 
 const StyledImage = styled.div`
@@ -70,20 +69,17 @@ const StyledDescription = styled.div`
   perspective: 600px;
   perspective-origin: center;
   overflow: hidden;
-  border: 1px solid red;
 `;
 
 const StyledSteps = styled.div`
   height: ${IMGHEIGHT * 6}px;
   transform: translateY(calc(-100% / 3 * ${({ $current }) => $current}));
   transition: all 0.5s;
-  border: 2px solid black;
 `;
 
 const StyledStep = styled.div`
   height: ${IMGHEIGHT * 2}px;
   overflow-y: scroll;
-  border: 1px solid green;
 `;
 
 function Roller({ data }) {

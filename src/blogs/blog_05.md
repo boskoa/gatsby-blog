@@ -1,6 +1,7 @@
 ---
 title: Fifth blog
 image: ../images/05.jpg
+slug: "fifth-post"
 ---
 
 ### Lorem ipsum dolor

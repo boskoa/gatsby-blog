@@ -7,7 +7,8 @@ module.exports = {
     description: "Just a little practising",
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-transformer-remark",
+  plugins: [
+    "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
@@ -26,6 +27,5 @@ module.exports = {
         path: `${__dirname}/src/images/`,
       },
     },
-
   ]
 };

@@ -1,6 +1,7 @@
 ---
 title: Third blog
 image: ../images/03.jpg
+slug: "third-post"
 ---
 
 ### Lorem ipsum dolor
